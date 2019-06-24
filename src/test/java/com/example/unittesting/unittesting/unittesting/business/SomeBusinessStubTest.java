@@ -8,13 +8,26 @@ import com.example.unittesting.unittesting.data.SomeDataService;
 
 //My stub
 class SomeDataServiceStub implements SomeDataService{
-
 	@Override
 	public int[] retrieveAllData() {
 		return new int[] {1,2,3};
 	}
-	
 }
+
+class SomeDataServiceOneElementStub implements SomeDataService{
+	@Override
+	public int[] retrieveAllData() {
+		return new int[] {1};
+	}
+}
+
+class SomeDataServiceEmptyStub implements SomeDataService{
+	@Override
+	public int[] retrieveAllData() {
+		return new int[] {};
+	}
+}
+
 
 public class SomeBusinessStubTest {
 
@@ -30,7 +43,7 @@ public class SomeBusinessStubTest {
 	@Test
 	public void calculateSum_EmptyArray() {
 		SomeBusinessImpl business = new SomeBusinessImpl();
-		business.setSomeDataService(new SomeDataServiceStub());
+		business.setSomeDataService(new SomeDataServiceEmptyStub());
 		int actualResult = business.calculateSumUsingDatasService();//calculateSumUsingDatasService
 		int expectedResult = 0;
 		assertEquals(expectedResult, actualResult);
@@ -40,7 +53,7 @@ public class SomeBusinessStubTest {
 	@Test
 	public void calculateSum_OneValue() {
 		SomeBusinessImpl business = new SomeBusinessImpl();
-		business.setSomeDataService(new SomeDataServiceStub());
+		business.setSomeDataService(new SomeDataServiceOneElementStub());
 		int actualResult = business.calculateSumUsingDatasService();//1
 		int expectedResult = 1;
 		assertEquals(expectedResult, actualResult);
