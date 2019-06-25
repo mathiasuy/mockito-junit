@@ -14,12 +14,23 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 public class ListMockTest {
 
+	/*
+	 * Retornos por defecto:
+	 * 	null
+	 * 	Lista vacía
+	 * 	false
+	 * 	0
+	 * 
+	 */
+	
+	
 	List<String> mock = mock(List.class);
 	
 	@Test
@@ -95,25 +106,6 @@ public class ListMockTest {
 		//PAra verificar que nunca se llamó get(20)...
 		verify(mock,Mockito.never()).get(20);
 		
-		//SUT
-//		String value1 = mock.get(1);
-//		String value2 = mock.get(0);
-//		verify(mock).get(0); //Falla porque se llamó 2 veces a get(0), tengo que indicarle con times(2) para decirle que se llamó 2 veces
-		
-		
-		//Verify Fail
-//		verify(mock).get(0);
-//		verify(mock, times(2)).get(Mockito.anyInt());
-//		verify(mock,times(1)).get(Mockito.anyInt());
-		
-		//Verify Fail
-//		verify(mock).get(0); //Verifica la llamada con (0), por defecto comprueba el primer llamado
-//		verify(mock).get(0); //Fallaría porque no hay una primer llamada con parámetro 1
-//		verify(mock, times(2)).get(Mockito.anyInt());//Verifica la segunda llamada con cualquier entero 
-//		verify(mock,atLeast(1)).get(Mockito.anyInt());
-//		verify(mock,Mockito.atLeastOnce(1)).get(Mockito.anyInt());
-//		verify(mock,atMost(2)).get(Mockito.anyInt());
-//		verify(mock,never()).get(2);
 	}
 	
 	@Test
@@ -145,6 +137,7 @@ public class ListMockTest {
 	}
 	
 	@Test
+	@Ignore
 	public void mocki() {
 		ArrayList arrayListMock = mock(ArrayList.class);
 		System.out.println(arrayListMock.get(0));//null
@@ -158,20 +151,21 @@ public class ListMockTest {
 	
 	
 	@Test
+//	@Ignore
 	public void spying() {
 		ArrayList arrayListSpy = spy(ArrayList.class);
 		arrayListSpy.add("Test0");
-		System.out.println(arrayListSpy.get(0));//null
-		System.out.println(arrayListSpy.size());//0
+		System.out.println(arrayListSpy.get(0));//0
+		System.out.println(arrayListSpy.size());//1
 		arrayListSpy.add("Test");
 		arrayListSpy.add("Test2");
-		System.out.print(arrayListSpy.size());
+		System.out.println(arrayListSpy.size());//3
 
 		when(arrayListSpy.size()).thenReturn(5);
-		System.out.print(arrayListSpy.size());//5		
+		System.out.println(arrayListSpy.size());//5		
 		
 		arrayListSpy.add("Test4");
-		System.out.print(arrayListSpy.size());//5		
+		System.out.println(arrayListSpy.size());//5		
 		
 		verify(arrayListSpy).add("Test4");
 	}
