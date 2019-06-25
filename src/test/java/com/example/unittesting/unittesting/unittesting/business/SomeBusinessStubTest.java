@@ -14,6 +14,9 @@ class SomeDataServiceStub implements SomeDataService{
 	}
 }
 
+//PRoblemas: A medida que el caso se hace màs complejo, es màs difìcil darle un nombre adecuado para poder identificarlo
+//Alternativa: usar javadoc o mock
+//Se puede crear las clases que implementen esa interface dinàmicamente y solucionar el problema
 class SomeDataServiceOneElementStub implements SomeDataService{
 	@Override
 	public int[] retrieveAllData() {
